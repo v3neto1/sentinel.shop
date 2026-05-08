@@ -1,0 +1,465 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    /* Il gradiente va dal nero (top) al viola (bottom) */
+    background: linear-gradient(to top, #6a1b9a, #000000);
+    background-attachment: fixed;
+    color: rgb(255, 255, 255);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Creazione della griglia come overlay */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Crea linee sottili orizzontali e verticali */
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px; /* Dimensione dei quadratini della griglia */
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Assicurati che i contenuti stiano sopra la griglia */
+header, section {
+    position: relative;
+    z-index: 1;
+}
+
+.hero {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: transparent; /* Togliamo lo sfondo precedente */
+    }
+  /* --- NAVIGAZIONE CENTRATA --- */
+  nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 0 10px 0;
+    width: 100%;
+    /* Rimuoviamo il nero solido e mettiamo una sfumatura leggera */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
+    
+    /* Questo assicura che il menu sia sopra la griglia ma non la nasconda */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.logo {
+    color: #bc4eff;
+    font-weight: bold;
+    font-size: 1.8rem;
+    letter-spacing: 5px;
+    text-shadow: 0 0 10px rgba(188, 78, 255, 0.5);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    margin-top: 10px;
+    padding: 0;
+    gap: 30px;
+}
+/* Contenitore per allineare i bottoni a sinistra sotto il testo */
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 25px; /* Spazio dal testo sopra */
+  justify-content: flex-start; /* Allinea a sinistra */
+}
+
+/* Stile base dei bottoni */
+.btn {
+  font-family: 'Inter', sans-serif;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 12px 24px;
+  border-radius: 50px;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* Bottone Blu Gradiente (Iniziare) */
+.btn-primary {
+  background: linear-gradient(90deg, #c300ff 0%, #de0cda 100%);
+  color: #ffffff;
+  border: none;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(144, 0, 255, 0.4);
+}
+
+.btn-primary .arrow {
+  margin-left: 8px;
+  transition: transform 0.2s;
+}
+
+.btn-primary:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* Bottone Trasparente (Prova la demo) */
+.btn-outline {
+    /* RESET */
+    display: inline-flex !important;
+    align-items: center !important;
+    text-decoration: none !important;
+    
+    /* STILE TRASPARENTE / VETRO */
+    background: rgba(255, 255, 255, 0.05) !important; /* Quasi invisibile */
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important; /* Bordo sottile lucido */
+    backdrop-filter: blur(8px) !important; /* Effetto sfocato dietro */
+    
+    /* FORMA E DIMENSIONI (Uguali al tasto Prezzi) */
+    padding: 10px 25px !important;
+    border-radius: 50px !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    transition: all 0.3s ease !important;
+}
+
+/* Effetto quando ci passi sopra col mouse */
+.btn-outline:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    transform: translateY(-2px) !important;
+}
+.external-icon {
+  margin-right: 8px;
+}
+/* Stile del contenitore navigazione */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px; /* Spazio tra le voci */
+  align-items: center;
+  background: transparent;
+}
+
+/* Stile base dei link */
+.nav-item {
+  text-decoration: none;
+  color: #94a3b8; /* Colore grigio-azzurro tipico dell'immagine */
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Effetto hover: diventa più chiaro */
+.nav-item:hover {
+  color: #ffffff;
+}
+
+/* --- IL BADGE BETA --- */
+.badge-beta {
+  font-size: 10px;
+  font-weight: 700;
+  color: #3b82f6; /* Blu acceso */
+  background: rgba(59, 130, 246, 0.1); /* Sfondo blu molto trasparente */
+  padding: 2px 6px;
+  border-radius: 6px;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+/* Il quadratino scuro che contiene il logo */
+.logo-icon {
+  width: 35px;         /* Dimensione fissa del quadratino */
+  height: 35px;        /* Deve essere uguale alla larghezza */
+  min-width: 35px;     /* Impedisce che si rimpicciolisca se c'è poco spazio */
+  
+  background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
+  border-radius: 8px; 
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;    /* Taglia l'immagine se prova a uscire */
+}
+
+/* L'immagine PNG vera e propria */
+.logo-icon img {
+  width: 70%;          /* L'immagine occuperà il 70% del quadratino */
+  height: 70%;         /* Così lasciamo un po' di "aria" ai bordi */
+  object-fit: contain; /* Mantiene le proporzioni senza schiacciarla */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+.card-header h2 {
+  font-size: 28px;
+  margin: 0;
+  font-weight: 700;
+}
+
+.subtitle {
+  color: #94a3b8;
+  font-size: 14px;
+  margin-top: 8px;
+}
+.amount {
+  font-size: 48px;
+  font-weight: 800;
+}
+
+.currency {
+  font-size: 24px;
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+.period {
+  color: #94a3b8;
+  margin-left: 8px;
+}
+
+/* Bottone Acquisto */
+/* Stile del bottone Acquisto */
+.btn-purchase, .btn-purchase-white {
+    display: block !important;
+    width: 100% !important;
+    padding: 14px 0 !important;
+    margin-top: 25px !important;
+    margin-bottom: 25px !important;
+    
+    border-radius: 50px !important; /* Forma a pillola come in foto */
+    text-align: center !important;
+    text-decoration: none !important;
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    transition: all 0.3s ease !important;
+    cursor: pointer !important;
+}
+
+/* Versione per Card Standard (Grigio Vetro) */
+.btn-purchase {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+}
+
+.btn-purchase:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Versione per Card "A Vita" (Bianco Pieno) */
+.btn-purchase-white {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: none !important;
+}
+
+.btn-purchase-white:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3) !important;
+}
+.btn-purchase:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Lista caratteristiche */
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.features-list li {
+  margin-bottom: 15px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  color: #e2e8f0;
+}
+
+.check {
+  color: #3b82f6; /* Colore blu dei check */
+  margin-right: 12px;
+  font-weight: bold;
+}
+/* Questo è il contenitore che racchiude la sezione prezzi */
+.pricing-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  
+  /* Aggiungiamo un gradiente scuro per far "reagire" il vetro */
+  background: radial-gradient(circle at center, #1a0b2e 0%, #000000 100%);
+  
+  /* Se vuoi mantenere la griglia, assicurati che sia qui sotto */
+  background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+/* Card Principale con effetto vetro potenziato */
+.glass-card {
+    /* FORZA LA LARGHEZZA: Impedisce che si allarghi troppo */
+    width: 350px !important; 
+    min-width: 320px !important;
+    max-width: 90% !important;
+    
+    /* RESET POSIZIONE: La centra nel contenitore */
+    margin: 20px auto !important;
+    display: block !important;
+
+    /* EFFETTO VETRO REALE */
+    background: rgba(255, 255, 255, 0.05) !important; /* Colore base trasparente */
+    backdrop-filter: blur(15px) !important; /* Sfoca lo sfondo */
+    -webkit-backdrop-filter: blur(15px) !important; /* Per browser Apple */
+    
+    /* BORDO E ANGOLI */
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 28px !important;
+    padding: 30px !important;
+    
+    /* OMBRA PER DISTACCARLA DALLA GRIGLIA */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+    
+    /* TESTO */
+    color: white !important;
+}
+
+/* Badge "Most Popular" */
+.popular-badge {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  background: #3b82f6; /* Blu luminoso */
+  color: white;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+}
+
+/* Bottone Acquisto Bianco (Stile Apple/SaaS) */
+.btn-purchase {
+/* Stile del bottone Acquisto */
+.btn-purchase, .btn-purchase-white {
+    display: block !important;
+    width: 100% !important;
+    padding: 14px 0 !important;
+    margin-top: 25px !important;
+    margin-bottom: 25px !important;
+    
+    border-radius: 50px !important; /* Forma a pillola come in foto */
+    text-align: center !important;
+    text-decoration: none !important;
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    transition: all 0.3s ease !important;
+    cursor: pointer !important;
+}
+
+/* Versione per Card Standard (Grigio Vetro) */
+.btn-purchase {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+}
+
+.btn-purchase:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Versione per Card "A Vita" (Bianco Pieno) */
+.btn-purchase-white {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: none !important;
+}
+
+.btn-purchase-white:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3) !important;
+}
+.btn-purchase-white:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
+}
+
+/* Testi e Icone */
+.amount { font-size: 52px; font-weight: 800; color: white; }
+.period { color: #94a3b8; font-size: 15px; }
+
+.check {
+  color: #3b82f6;
+  margin-right: 12px;
+  font-weight: bold;
+}
+
+.features-list li {
+  color: #e2e8f0;
+  margin-bottom: 15px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  }
+  .btn-review {
+    /* RESETTA LO STILE DEL BROWSER */
+    display: inline-flex !important;
+    align-items: center !important;
+    text-decoration: none !important; /* Toglie la sottolineatura blu */
+    background: rgba(255, 255, 255, 0.05) !important; /* Torna al vetro scuro */
+    color: white !important; /* Testo bianco */
+    
+    /* STILE ORIGINALE */
+    padding: 12px 24px !important;
+    border-radius: 50px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn-review:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    transform: translateY(-2px) !important;
+}
+
+.btn-review .arrow {
+    margin-right: 10px;
+    font-size: 18px;
+}
+.text-purple {
+    color: #d100f3 !important; /* Il viola acceso che abbiamo usato prima */
+    font-weight: 800;          /* Lo rende bello spesso e leggibile */
+    
+    /* OPZIONALE: Un leggero bagliore per farlo risaltare sul nero */
+    text-shadow: 0 0 15px rgba(209, 0, 243, 0.4);
+}

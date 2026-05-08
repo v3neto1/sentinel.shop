@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Sentinel Vanguard</title>
+    <style>
+        /* CSS INTEGRATO - Così non vedi bianco */
+        body { 
+            background-color: #0a0a0a; 
+            color: white; 
+            font-family: 'Segoe UI', sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+        }
+        .auth-container { 
+            background: #151515; 
+            padding: 30px; 
+            border-radius: 12px; 
+            border: 1px solid #6a0dad; 
+            box-shadow: 0 0 20px rgba(106, 13, 173, 0.4); 
+            width: 320px; 
+        }
+        .tab-menu { display: flex; margin-bottom: 20px; }
+        .tab-menu button { 
+            flex: 1; background: none; border: none; color: #888; 
+            cursor: pointer; padding: 10px; font-size: 1rem; border-bottom: 2px solid #222;
+        }
+        .tab-menu button.active { color: #a020f0; border-bottom: 2px solid #a020f0; }
+        .input-group { margin-bottom: 15px; }
+        .input-group input { 
+            width: 100%; padding: 10px; background: #000; border: 1px solid #333; 
+            color: white; border-radius: 5px; box-sizing: border-box;
+        }
+        .btn-submit { 
+            width: 100%; padding: 10px; background: #6a0dad; border: none; 
+            color: white; border-radius: 5px; cursor: pointer; font-weight: bold;
+        }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="auth-container">
+    <div class="tab-menu">
+        <button id="login-tab" class="active" onclick="switchForm('login')">Accedi</button>
+        <button id="reg-tab" onclick="switchForm('register')">Registrati</button>
+    </div>
+
+    <form id="login-form">
+        <div class="input-group"><input type="email" id="login-email" placeholder="Email" required></div>
+        <div class="input-group"><input type="password" id="login-pass" placeholder="Password" required></div>
+        <button type="submit" class="btn-submit">Entra</button>
+    </form>
+
+    <form id="register-form" class="hidden">
+        <div class="input-group"><input type="email" id="reg-email" placeholder="Email" required></div>
+        <div class="input-group"><input type="password" id="reg-pass" placeholder="Crea Password" required></div>
+        <button type="submit" class="btn-submit">Registrati</button>
+    </form>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+    // --- COPIA E INCOLLA I TUOI DATI QUI SOTTO ---
+    const firebaseConfig = {
+    apiKey: "AIzaSyAll-x8tzDpEbyr6sNBhVZNRIQIZEmhFx0",
+  authDomain: "sentinel-vanguard-895c9.firebaseapp.com",
+  projectId: "sentinel-vanguard-895c9",
+  storageBucket: "sentinel-vanguard-895c9.firebasestorage.app",
+  messagingSenderId: "865610055981",
+  appId: "1:865610055981:web:e08922e5d065b3529593a4",
+  measurementId: "G-T69212E451"
+    };
+    // --------------------------------------------
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+
+    // Funzione per scambiare i form
+    window.switchForm = (type) => {
+        if(type === 'login') {
+            document.getElementById('login-form').classList.remove('hidden');
+            document.getElementById('register-form').classList.add('hidden');
+            document.getElementById('login-tab').classList.add('active');
+            document.getElementById('reg-tab').classList.remove('active');
+        } else {
+            document.getElementById('login-form').classList.add('hidden');
+            document.getElementById('register-form').classList.remove('hidden');
+            document.getElementById('login-tab').classList.remove('active');
+            document.getElementById('reg-tab').classList.add('active');
+        }
+    };
+
+    // Registrazione
+    document.getElementById('register-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('reg-email').value;
+        const pass = document.getElementById('reg-pass').value;
+        createUserWithEmailAndPassword(auth, email, pass)
+            .then(() => alert("Registrato!"))
+            .catch(err => alert("Errore: " + err.message));
+    });
+
+    // Login
+    document.getElementById('login-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('login-email').value;
+        const pass = document.getElementById('login-pass').value;
+        signInWithEmailAndPassword(auth, email, pass)
+            .then(() => alert("Accesso effettuato!"))
+            .catch(err => alert("Errore: " + err.message));
+    });
+</script>
+
+</body>
+</html>
