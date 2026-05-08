@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinel Vanguard | New Anticheat for </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section id="home" class="hero">
+      <h1>
+  Proteggi il tuo server FiveM con 
+  <span class="text-purple">Sentinel Vanguard</span>
+</h1>
+        <p>La soluzione anti-cheat e di intelligence sui giocatori per eccellenza.</p>
+        <div class="hero-buttons">
+            <a href="#sezione-prezzi" class="btn btn-primary">
+  Prezzi
+</a>
+               <a href="https://tuo-sito-recensioni.com" target="_blank" class="btn-outline">
+     <span style="margin-right: 8px;">↗</span> Lascia la tua recensione
+  </a>
+
+</div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<header>
+    <nav class="navbar">
+  <div class="logo-container">
+    <div class="logo-icon">
+      <img src="sentinel.png" alt="Logo">
+    </div>
+    <span class="logo-text">Sentinel Vanguard</span>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="#" class="nav-item">Home</a></li>
+    <li id="login-item"><a href="login.html" class="nav-item">Login</a></li>
+   <li class="nav-item">
+    <a href="https://v3neto1.github.io/sentinel.ac/" class="nav-link">Servizi</a>
+</li>
+  </ul>
+</nav>
+<section class="pricing-section">
+  <h1 class="title-prezzi">Piani Anticheat</h1>
+</div>
+<div class="glass-card featured">
+  <div class="popular-badge">
+  </div>
+
+  <div class="card-header">
+    <h2>Mensile</h2>
+    <p class="subtitle">Perfetto per i team ancora in crescita</p>
+  </div>
+
+  <div class="price-container">
+    <span class="currency">€</span>
+    <span class="amount">15</span>
+    <span class="period">/per mese</span>
+  </div>
+
+  <a href="https://buy.stripe.com/test_eVqaEXeDea7Ubmvh2Sak001" class="btn-purchase-white">Acquisto</a>
+
+  <ul class="features-list">
+    <li><span class="check">·</span> Accesso di 1 mese</li>
+    <li><span class="check">·</span> Anti-Bypass</li>
+    <li><span class="check">·</span> Dashboard Live</li>
+    <li><span class="check">·</span> Assistenza 24/7</li>
+  </ul>
+</div>
+<div class="glass-card featured">
+  <div class="popular-badge">
+    <span class="star">★</span> Popolare
+  </div>
+
+  <div class="card-header">
+    <h2>Lifetime</h2>
+    <p class="subtitle">Perfetto per i team professionali</p>
+  </div>
+
+  <div class="price-container">
+    <span class="currency">€</span>
+    <span class="amount">30</span>
+    <span class="period">/ per sempre</span>
+  </div>
+
+  <a href="https://buy.stripe.com/test_7sY5kDdza1Bobmv6oeak002" class="btn-purchase-white">Acquisto</a>
+
+  <ul class="features-list">
+    <li><span class="check">·</span> Accesso Lifetime</li>
+    <li><span class="check">·</span> Log</li>
+    <li><span class="check">·</span> Anti-DDoS</li>
+    <li><span class="check">·</span> Dashboard Live</li>
+    <li><span class="check">·</span> Anti-Bypass</li>
+    <li><span class="check">·</span> Assistenza 24/7</li>
+  </ul>
+</div>
+<li class="nav-item">
+    <a href="https://v3neto1.github.io/sentinel.ac/" class="nav-link">Servizi</a>
+</li>
+<script type="module">
+  // 1. Importa le funzioni necessarie
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+  // 2. TUA CONFIGURAZIONE (Prendila dalla console Firebase, sezione Impostazioni Progetto)
+  const firebaseConfig = {
+    apiKey: "AIzaSyAll-x8tzDpEbyr6sNBhVZNRIQIZEmhFx0", 
+    authDomain: "sentinel-vanguard-895c9.firebaseapp.com",
+    projectId: "sentinel-vanguard-895c9",
+    storageBucket: "sentinel-vanguard-895c9.appspot.com",
+    messagingSenderId: "865610055981",
+    appId: "1:865610055981:web:e08922e5d065b3529593a4"
+  };
+
+  // 3. Inizializza Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth();
+
+  // 4. Gestione del link Dashboard
+  const dashLink = document.getElementById('dashboard-link');
+
+  if (dashLink) {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // UTENTE LOGGATO
+        dashLink.innerText = "Dashboard";
+        dashLink.href = "dashboard.html";
+        dashLink.style.color = "#a020f0"; 
+      } else {
+        // UTENTE NON LOGGATO
+        dashLink.innerText = "Account non collegato: ACCEDI O REGISTRATI";
+        dashLink.href = "login.html";
+        dashLink.style.color = "#888";
+      }
+    });
+  } else {
+    console.error("Errore: Non ho trovato l'ID 'dashboard-link' nell'HTML!");
+  }
+</script>
